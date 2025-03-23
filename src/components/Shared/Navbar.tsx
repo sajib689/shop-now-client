@@ -6,7 +6,7 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleOpen = () => {
-        setIsOpen(!isOpen); // Toggle state
+        setIsOpen(!isOpen); 
     };
 
     return (
