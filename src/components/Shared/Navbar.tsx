@@ -1,4 +1,5 @@
 'use client';
+import Image from "next/image";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 
@@ -10,7 +11,8 @@ const Navbar = () => {
     };
 
     return (
-        <div className="relative">
+        <div className="bg-[#FDEEF5]">
+              <div className="relative container mx-auto">
             {/* Menu Button */}
             <div onClick={handleOpen} className="cursor-pointer p-2 block md:hidden lg:hidden">
                 <FaBars size={24} />
@@ -22,7 +24,9 @@ const Navbar = () => {
                 ${isOpen ? "mt-0 opacity-100" : "mt-[-400px] md:mt-[400px] lg:mt-[400px] opacity-0 md:opacity-100"}`}>
                 
                 {/* Logo */}
-                <div className="text-xl font-bold">Logo</div>
+                <div className="text-xl font-bold">
+                    <Image src="/logo.png" width={100} height={100} alt="Logo" />
+                </div>
 
                 {/* Navigation Links */}
                 <div>
@@ -44,6 +48,8 @@ const Navbar = () => {
                 </div>
             </div>
         </div>
+        </div>
+      
     );
 };
 

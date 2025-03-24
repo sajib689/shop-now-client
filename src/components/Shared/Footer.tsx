@@ -2,7 +2,7 @@
 
 const Footer = () => {
     return (
-        <div>
+        <div className="bg-[#F7F7F7]">
             
         </div>
     );
