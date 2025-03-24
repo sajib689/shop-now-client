@@ -5,32 +5,26 @@ import { MdEmail } from "react-icons/md";
 
 const Footer = () => {
   return (
-    <div className="container mx-auto">
-      <div className="bg-[#F7F7F7] grid grid-cols-1 md:grid-cols-5 lg:grid-cols-5 gap-4 p-4">
+    <div className="container mx-auto bg-[#F7F7F7]">
+      <div className=" grid grid-cols-1 md:grid-cols-5 lg:grid-cols-5 gap-4 p-4">
         <div>
-          <Image src="/logo.png" width={100} height={100} alt="Logo" />
-          <div>
+          <Image src="/logo.png" width={130} height={130} alt="Logo" />
+          <div className='mt-5'>
             <p>
               We aim to restore faith in people by offering a platform with
               high-quality products that provide greater value than their price
             </p>
-            <div>
-            <FaTelegramPlane />
-            <p>
-            Dhaka Bangladesh
-            </p>
+            <div className="flex items-center space-x-2 mt-3">
+              <FaTelegramPlane />
+              <p>Dhaka Bangladesh</p>
             </div>
-            <div>
-            <CiMobile4 />
-            <p>
-                +8801234567890
-            </p>
+            <div className="flex items-center space-x-2">
+              <CiMobile4 />
+              <p>+8801234567890</p>
             </div>
-            <div>
-            <MdEmail />
-                <p>
-                shopnowbd@outlook.com
-                </p>
+            <div className="flex items-center space-x-2">
+              <MdEmail />
+              <p>shopnowbd@outlook.com</p>
             </div>
           </div>
         </div>
