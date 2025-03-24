@@ -5,8 +5,8 @@ import { MdEmail } from "react-icons/md";
 
 const Footer = () => {
   return (
-    <div className="container mx-auto bg-[#F7F7F7]">
-      <div className=" grid grid-cols-1 md:grid-cols-5 lg:grid-cols-5 gap-4 p-4">
+    <div className="bg-[#F7F7F7]">
+      <div className="container mx-auto  grid grid-cols-1 md:grid-cols-5 lg:grid-cols-5 gap-4 p-4">
         <div>
           <Image src="/logo.png" width={130} height={130} alt="Logo" />
           <div className='mt-5'>
