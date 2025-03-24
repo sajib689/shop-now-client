@@ -21,7 +21,7 @@ const Navbar = () => {
             {/* Navbar */}
             <div className={`flex flex-col md:flex-row lg:flex-row justify-between items-center p-4 
                 transition-all duration-300 ease-in-out 
-                ${isOpen ? "mt-0 opacity-100" : "mt-[-400px] md:mt-[400px] lg:mt-[400px] opacity-0 md:opacity-100"}`}>
+                ${isOpen ? "mt-0 opacity-100" : "mt-[-400px] md:mt-0 lg:mt-0 opacity-0 md:opacity-100"}`}>
                 
                 {/* Logo */}
                 <div className="text-xl font-bold">
