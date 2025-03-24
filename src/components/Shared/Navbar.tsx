@@ -1,5 +1,6 @@
 'use client';
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 
@@ -39,9 +40,9 @@ const Navbar = () => {
 
                 {/* Auth Buttons */}
                 <div className="space-x-2">
-                    <button className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                    <Link href='/login' className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
                         Sign In
-                    </button>
+                    </Link>
                     <button className="px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-800">
                         Sign Up
                     </button>
