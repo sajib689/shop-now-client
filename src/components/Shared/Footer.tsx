@@ -1,4 +1,7 @@
 import Image from "next/image";
+import { FaTelegramPlane } from "react-icons/fa";
+import { CiMobile4 } from "react-icons/ci";
+import { MdEmail } from "react-icons/md";
 
 const Footer = () => {
   return (
@@ -11,6 +14,24 @@ const Footer = () => {
               We aim to restore faith in people by offering a platform with
               high-quality products that provide greater value than their price
             </p>
+            <div>
+            <FaTelegramPlane />
+            <p>
+            Dhaka Bangladesh
+            </p>
+            </div>
+            <div>
+            <CiMobile4 />
+            <p>
+                +8801234567890
+            </p>
+            </div>
+            <div>
+            <MdEmail />
+                <p>
+                shopnowbd@outlook.com
+                </p>
+            </div>
           </div>
         </div>
         <div>2</div>
