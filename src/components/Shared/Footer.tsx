@@ -2,6 +2,7 @@ import Image from "next/image";
 import { FaTelegramPlane } from "react-icons/fa";
 import { CiMobile4 } from "react-icons/ci";
 import { MdEmail } from "react-icons/md";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -28,7 +29,29 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div>2</div>
+        <div>
+          <h1>Categories</h1>
+          <div>
+            <Link href='' className="cursor-pointer hover:text-blue-500">
+            Dhamaka Offer
+            </Link>
+            <Link href='' className="cursor-pointer hover:text-blue-500">
+            Combo Offer
+            </Link>
+            <Link href='' className="cursor-pointer hover:text-blue-500">
+            Polo T-shirt
+            </Link>
+            <Link href='' className="cursor-pointer hover:text-blue-500">
+            T-shirt
+            </Link>
+            <Link href='' className="cursor-pointer hover:text-blue-500">
+            Shirt
+            </Link>
+            <Link href='' className="cursor-pointer hover:text-blue-500">
+            Winter Collection
+            </Link>
+          </div>
+        </div>
         <div>3</div>
         <div>4</div>
         <div>5</div>
