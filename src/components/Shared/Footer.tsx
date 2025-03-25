@@ -30,8 +30,8 @@ const Footer = () => {
           </div>
         </div>
         <div>
-          <h1>Categories</h1>
-          <div>
+          <h1 className='uppercase text-[14px] font-[600] text-[#333]'>Categories</h1>
+          <div className='flex flex-col mt-4 gap-1'>
             <Link href='' className="cursor-pointer hover:text-blue-500">
             Dhamaka Offer
             </Link>
