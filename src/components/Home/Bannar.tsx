@@ -1,3 +1,4 @@
+import Image from "next/image";
 
 
 const Bannar = () => {
@@ -5,17 +6,19 @@ const Bannar = () => {
         <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Left Section - Model */}
         <div className="relative w-full md:w-1/3 flex justify-center">
-          <img
-            src="https://i.ibb.co/X3T6rP2/model-shirt.png"
+          <Image
+            src="https://i.ibb.co/7dzKfN8L/BLACK-SHIRT-scaled-1.jpg"
             alt="Model"
-            className="w-60"
+            width={460}
+            height={450}
+            className="rounded-md object-cover"
           />
-          <div className="absolute left-0 bottom-6 rotate-[-90deg] text-pink-600 font-bold text-xl tracking-widest">
+          {/* <div className="absolute left-0 bottom-6 rotate-[-90deg] text-pink-600 font-bold text-xl tracking-widest">
             PREMIUM SHIRT
           </div>
           <div className="absolute left-[-40px] top-10 text-5xl font-extrabold text-pink-100 opacity-30 rotate-[-90deg]">
             FASHION
-          </div>
+          </div> */}
         </div>
   
         {/* Middle Section - Text */}
@@ -42,10 +45,12 @@ const Bannar = () => {
   
         {/* Right Section - T-Shirts Image */}
         <div className="w-full md:w-1/3 flex justify-center">
-          <img
-            src="https://i.ibb.co/0FLtcg4/polo-tshirts.png"
+          <Image
+            src="https://i.ibb.co.com/sptY1MxC/1.webp"
             alt="Polo T-Shirts"
-            className="w-72"
+            width={460}
+            height={450}
+            className="rounded-md object-contain"
           />
         </div>
       </div>
