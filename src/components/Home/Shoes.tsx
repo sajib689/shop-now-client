@@ -42,7 +42,7 @@ const Shoes = () => {
       ];
       
     return (
-       <section className="py-12 px-6 bg-gray-100">
+       <section className="py-12 px-6 bg-[#F7F7F7]">
              <div className="container mx-auto">
                <h2 className="text-3xl md:text-4xl font-bold text-[#01204E] text-center mb-8">
                  New Shoes

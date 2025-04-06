@@ -34,7 +34,7 @@ const DhamakaOffer = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-center gap-10 py-12 px-6 bg-gray-100">
+    <div className="flex items-center justify-center gap-10 py-12 px-6 bg-[#F7F7F7]">
       {/* Left Image */}
       <div className="w-1/3">
         <Image src="/offer-left.jpg" alt="Dhamaka Offer Left" width={620} height={620} className="rounded-lg shadow-lg w-full" />

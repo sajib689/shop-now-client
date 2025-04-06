@@ -1,9 +1,12 @@
 import Image from "next/image";
+import { IoShirtSharp } from "react-icons/io5";
+import { RiShirtFill } from "react-icons/ri";
+import { BiSolidOffer } from "react-icons/bi";
 
 
 const Bannar = () => {
     return (
-        <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="bg-[#F7F7F7] rounded-xl shadow-lg p-6 flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Left Section - Model */}
         <div className="relative w-full md:w-1/3 flex justify-center">
           <Image
@@ -32,13 +35,16 @@ const Bannar = () => {
           </p>
           <div className="flex flex-wrap gap-3 justify-center md:justify-start">
             <button className="bg-gray-100 text-sm px-4 py-2 rounded-md shadow">
-              👕 POLO T-SHIRT
+            <IoShirtSharp />
+            POLO T-SHIRT
             </button>
             <button className="bg-gray-100 text-sm px-4 py-2 rounded-md shadow">
-              👔 SHIRT
+            <RiShirtFill />
+            SHIRT
             </button>
             <button className="bg-gray-100 text-sm px-4 py-2 rounded-md shadow">
-              🎉 DHAMAKA OFFER
+            <BiSolidOffer />
+            DHAMAKA OFFER
             </button>
           </div>
         </div>
@@ -46,7 +52,7 @@ const Bannar = () => {
         {/* Right Section - T-Shirts Image */}
         <div className="w-full md:w-1/3 flex justify-center">
           <Image
-            src="https://i.ibb.co.com/sptY1MxC/1.webp"
+            src="https://i.ibb.co/sptY1MxC/1.webp"
             alt="Polo T-Shirts"
             width={460}
             height={450}
