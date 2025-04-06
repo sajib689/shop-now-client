@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FcManager } from "react-icons/fc";
 
 const Login = () => {
@@ -38,7 +39,7 @@ const Login = () => {
               type="submit"
               className="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 rounded"
             >
-              LOG IN
+              SIGN IN
             </button>
   
             <div className="flex justify-between items-center text-sm text-gray-600 mt-2">
@@ -56,9 +57,9 @@ const Login = () => {
 
             </div>
             <p className="text-sm text-gray-600">No account yet?</p>
-            <a href="#" className="text-sm font-semibold text-gray-800 hover:text-pink-600 underline">
+            <Link href="/register" className="text-sm font-semibold text-gray-800 hover:text-pink-600 underline">
               CREATE AN ACCOUNT
-            </a>
+            </Link>
           </div>
         </div>
       </div>
