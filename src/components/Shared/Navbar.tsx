@@ -12,7 +12,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className="bg-gray-100">
+        <div className="bg-[#F7F7F7]">
               <div className="relative container mx-auto">
             {/* Menu Button */}
             <div onClick={handleOpen} className="cursor-pointer p-2 block md:hidden lg:hidden">

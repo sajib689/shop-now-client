@@ -34,7 +34,7 @@ const ShopInfo = () => {
   ];
 
   return (
-    <div className='+++++++++++++++++++++++++++++++++++++++++++++++ pt-10 pb-10'>
+    <div className='bg-[#F7F7F7] pt-10 pb-10'>
       <div className="max-w-5xl mx-auto px-6 py-10">
       <h2 className="text-2xl font-semibold text-center mb-10">Why Shop With Us?</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
