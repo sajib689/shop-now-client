@@ -8,12 +8,30 @@ const Register = () => {
                 <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-lg relative">
                   
           
-                  <h2 className="text-2xl font-semibold text-gray-800 mb-6">Sign in</h2>
+                  <h2 className="text-2xl font-semibold text-gray-800 mb-6">Sign up</h2>
           
                   <form className="space-y-5">
+                  <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Username <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
+                      />
+                    </div>
+                  <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Phone Number <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
+                      />
+                    </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Username or email address <span className="text-red-500">*</span>
+                        Email Address <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
