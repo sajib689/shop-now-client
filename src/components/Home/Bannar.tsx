@@ -34,15 +34,15 @@ const Bannar = () => {
             taking you to the next level.
           </p>
           <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-            <button className="bg-gray-100 text-sm px-4 py-2 rounded-md shadow">
+            <button className="flex gap-1 justify-center items-center bg-gray-100 text-sm px-4 py-2 rounded-md shadow">
             <IoShirtSharp />
             POLO T-SHIRT
             </button>
-            <button className="bg-gray-100 text-sm px-4 py-2 rounded-md shadow">
+            <button className="flex gap-1 justify-center items-center bg-gray-100 text-sm px-4 py-2 rounded-md shadow">
             <RiShirtFill />
             SHIRT
             </button>
-            <button className="bg-gray-100 text-sm px-4 py-2 rounded-md shadow">
+            <button className="flex gap-1 justify-center items-center bg-gray-100 text-sm px-4 py-2 rounded-md shadow">
             <BiSolidOffer />
             DHAMAKA OFFER
             </button>
