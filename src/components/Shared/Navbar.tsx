@@ -41,10 +41,10 @@ const Navbar = () => {
                 {/* Auth Buttons */}
                 <div className="space-x-2">
                     <Link href='/login' className="px-4 py-2 bg-[#FF1C55] text-white rounded-md hover:bg-blue-600">
-                        Sign In
+                        Login
                     </Link>
                     <Link href='/register' className="px-4 py-2 bg-[#FF1C55] text-white rounded-md hover:bg-gray-800">
-                        Sign Up
+                        Register
                     </Link>
                 </div>
             </div>

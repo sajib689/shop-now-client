@@ -1,9 +1,10 @@
+import { FcManager } from "react-icons/fc";
 
 const Login = () => {
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <div className="flex items-center justify-center min-h-screen bg-[#F7F7F7]">
         <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-lg relative">
-          <button className="absolute top-4 right-4 text-gray-400 hover:text-black text-sm">× Close</button>
+          
   
           <h2 className="text-2xl font-semibold text-gray-800 mb-6">Sign in</h2>
   
@@ -50,7 +51,10 @@ const Login = () => {
           </form>
   
           <div className="text-center mt-6">
-            <div className="w-12 h-12 mx-auto rounded-full bg-gray-200 mb-2" />
+            <div className="w-12 h-12 mx-auto rounded-full bg-gray-200 mb-2">
+            <FcManager className='w-12 h-12 rounded-full' />
+
+            </div>
             <p className="text-sm text-gray-600">No account yet?</p>
             <a href="#" className="text-sm font-semibold text-gray-800 hover:text-pink-600 underline">
               CREATE AN ACCOUNT
