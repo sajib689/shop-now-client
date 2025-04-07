@@ -5,8 +5,13 @@ import usePostData from "@/hooks/usePostData";
 import { useEffect } from "react";
 import { toast } from "react-toast";
 import Loader from "@/lib/Loader";
+import { useDispatch } from "react-redux";
+import { loginUser } from "@/store/userSlice";
+
 const Login = () => {
   const { postData, loading, error } = usePostData();
+  const dispatch = useDispatch();
+
   if(loading) {
     <Loader/>
   }
@@ -26,8 +31,13 @@ const Login = () => {
       }
       // Then send user data to your backend
       const registerRes = await postData("/api/v1/login", user);
-      console.log(registerRes)
       if (registerRes) {
+        dispatch(loginUser({
+          user: registerRes.data,
+          token: registerRes.token,
+        }));
+        localStorage.setItem("user", JSON.stringify(registerRes.data));
+        localStorage.setItem("token", registerRes.token);
         toast("User Login successfully");
         form.reset();
       }

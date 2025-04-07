@@ -12,8 +12,8 @@ interface UserState {
 }
 
 const initialState: UserState = {
-  user: null,
-  token: null,
+  user: JSON.parse(localStorage.getItem('user') || 'null'),
+  token: localStorage.getItem('token') || null,
 };
 
 const userSlice = createSlice({
@@ -23,10 +23,16 @@ const userSlice = createSlice({
     loginUser(state, action: PayloadAction<{ user: User; token: string }>) {
       state.user = action.payload.user;
       state.token = action.payload.token;
+            // Save the user and token to localStorage for persistence
+            localStorage.setItem('user', JSON.stringify(action.payload.user));
+            localStorage.setItem('token', action.payload.token)
     },
     logoutUser(state) {
       state.user = null;
       state.token = null;
+        // Clear from localStorage when logging out
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
     },
   },
 });
