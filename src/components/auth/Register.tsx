@@ -2,7 +2,7 @@
 import { ToastContainer, toast } from "react-toast";
 import Link from "next/link";
 import { FcManager } from "react-icons/fc";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from 'axios';
 import usePostData from "@/hooks/usePostData";
 const image_api_key = process.env.NEXT_PUBLIC_IMG_BB_API;
@@ -10,9 +10,12 @@ const url = `https://api.imgbb.com/1/upload?key=${image_api_key}`
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { postData, loading, error } = usePostData();
-  if(error) {
-    toast(error.message)
-  }
+
+  useEffect(() => {
+    if (error) {
+      toast(error);
+    }
+  }, [error]);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
@@ -39,7 +42,6 @@ const Register = () => {
   
       // Then send user data to your backend
       const registerRes = await postData("/api/v1/register", user);
-      console.log(registerRes);
   
       if (registerRes) {
         toast("User created successfully");
@@ -170,7 +172,7 @@ const Register = () => {
   ) : (
     <button
       type="submit"
-      className="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 rounded"
+      className="cursor-pointer w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 rounded"
     >
       SIGN UP
     </button>
