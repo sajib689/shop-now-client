@@ -1,38 +1,67 @@
 'use client';
-
+import { ToastContainer, toast } from "react-toast";
 import Link from "next/link";
 import { FcManager } from "react-icons/fc";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import axios from 'axios';
 import usePostData from "@/hooks/usePostData";
+const image_api_key = process.env.NEXT_PUBLIC_IMG_BB_API;
+const url = `https://api.imgbb.com/1/upload?key=${image_api_key}`
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { postData, loading, error } = usePostData();
 
-const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  const form = e.currentTarget;
-
-  const user = {
-    name: form.name.value,
-    email: form.email.value,
-    password: form.password.value,
-    phone: form.phone.value,
-    address: form.address.value,
-    role: 'user',
-    photo: form.photo.value,
+  useEffect(() => {
+    if (error) {
+      toast(error);
+    }
+  }, [error]);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    formData.append("image", form.photo.files[0]);
+  
+    try {
+      // Upload image first
+      const uploadRes = await axios.post(url, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+  
+      const user = {
+        name: formData.get("name") as string,
+        email: formData.get("email") as string,
+        password: formData.get("password") as string,
+        phone: formData.get("phone") as string,
+        address: formData.get("address") as string,
+        role: "user",
+        photo: uploadRes.data.data.display_url as string,
+      };
+  
+      // Then send user data to your backend
+      const registerRes = await postData("/api/v1/register", user);
+  
+      if (registerRes) {
+        toast("User created successfully");
+        form.reset();
+      }
+  
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error("Something went wrong:", err.message)
+      } else {
+        console.error("Unexpected error:", err)
+      }
+    } 
   };
-
-  const res = await postData("/api/v1/register", user);
-  console.log(res)
-  if (res) {
-    alert("User created successfully");
-    form.reset();
-  }
-};
+  
 
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-[#F7F7F7]">
+      <ToastContainer position='top-right' />
       <div className="w-full max-w-3xl p-8 bg-white shadow-lg rounded-lg relative">
         <h2 className="text-2xl font-semibold text-gray-800 mb-6">Sign up</h2>
 
@@ -132,19 +161,25 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           </div>
 
           
+          {
+  loading ? (
+    <button
+      type="submit"
+      className="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 rounded"
+    >
+      Loading...
+    </button>
+  ) : (
+    <button
+      type="submit"
+      className="cursor-pointer w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 rounded"
+    >
+      SIGN UP
+    </button>
+  )
+}
 
-          <button
-            type="submit"
-            className="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 rounded"
-          >
-            SIGN UP
-          </button>
 
-          <div className="text-right text-sm text-gray-600 mt-2">
-            <a href="#" className="hover:underline text-pink-600">
-              Lost your password?
-            </a>
-          </div>
         </form>
 
         <div className="text-center mt-6">
