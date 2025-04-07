@@ -31,7 +31,6 @@ const Login = () => {
       }
       // Then send user data to your backend
       const registerRes = await postData("/api/v1/login", user);
-      console.log(registerRes)
       if (registerRes) {
         dispatch(loginUser({
           user: registerRes.data,
