@@ -3,17 +3,40 @@
 import Link from "next/link";
 import { FcManager } from "react-icons/fc";
 import { useState } from "react";
-
+import usePostData from "@/hooks/usePostData";
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-  
+  const { postData, loading, error } = usePostData();
+
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  const form = e.currentTarget;
+
+  const user = {
+    name: form.name.value,
+    email: form.email.value,
+    password: form.password.value,
+    phone: form.phone.value,
+    address: form.address.value,
+    role: 'user',
+    photo: form.photo.value,
+  };
+
+  const res = await postData("/api/v1/register", user);
+  console.log(res)
+  if (res) {
+    alert("User created successfully");
+    form.reset();
+  }
+};
+
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-[#F7F7F7]">
       <div className="w-full max-w-3xl p-8 bg-white shadow-lg rounded-lg relative">
         <h2 className="text-2xl font-semibold text-gray-800 mb-6">Sign up</h2>
 
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={handleSubmit}>
           {/* Row 1 */}
           <div className="flex gap-4">
             <div className="w-1/2">
