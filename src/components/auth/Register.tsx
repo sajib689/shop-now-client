@@ -1,5 +1,5 @@
 'use client';
-
+import { ToastContainer, toast } from "react-toast";
 import Link from "next/link";
 import { FcManager } from "react-icons/fc";
 import { useState } from "react";
@@ -10,7 +10,9 @@ const url = `https://api.imgbb.com/1/upload?key=${image_api_key}`
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { postData, loading, error } = usePostData();
-
+  if(error) {
+    toast(error.message)
+  }
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
@@ -40,7 +42,7 @@ const Register = () => {
       console.log(registerRes);
   
       if (registerRes) {
-        alert("User created successfully");
+        toast("User created successfully");
         form.reset();
       }
   
@@ -57,6 +59,7 @@ const Register = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-[#F7F7F7]">
+      <ToastContainer position='top-right' />
       <div className="w-full max-w-3xl p-8 bg-white shadow-lg rounded-lg relative">
         <h2 className="text-2xl font-semibold text-gray-800 mb-6">Sign up</h2>
 
@@ -156,19 +159,25 @@ const Register = () => {
           </div>
 
           
+          {
+  loading ? (
+    <button
+      type="submit"
+      className="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 rounded"
+    >
+      Loading...
+    </button>
+  ) : (
+    <button
+      type="submit"
+      className="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 rounded"
+    >
+      SIGN UP
+    </button>
+  )
+}
 
-          <button
-            type="submit"
-            className="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 rounded"
-          >
-            SIGN UP
-          </button>
 
-          <div className="text-right text-sm text-gray-600 mt-2">
-            <a href="#" className="hover:underline text-pink-600">
-              Lost your password?
-            </a>
-          </div>
         </form>
 
         <div className="text-center mt-6">
