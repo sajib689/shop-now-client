@@ -14,7 +14,7 @@ import {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const user = useSelector((state: RootState) => state.user.user)
+  const user = useSelector((state: RootState) => state.user.user);
   const dispatch = useDispatch();
   const handleOpen = () => {
     setIsOpen(!isOpen);
@@ -24,6 +24,13 @@ const Navbar = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
   };
+  const links = (
+    <>
+      <Link href='/' className="cursor-pointer hover:text-blue-500">Home</Link>
+      <Link href='/about' className="cursor-pointer hover:text-blue-500">About</Link>
+      <Link href='/contact' className="cursor-pointer hover:text-blue-500">Contact</Link>
+    </>
+  );
   return (
     <div className="bg-[#F7F7F7]">
       <div className="relative container mx-auto">
@@ -46,16 +53,14 @@ const Navbar = () => {
                     }`}
         >
           {/* Logo */}
-          <div className="text-xl font-bold">
+          <Link href='/' className="text-xl font-bold">
             <Image src="/logo.png" width={100} height={100} alt="Logo" />
-          </div>
+          </Link>
 
           {/* Navigation Links */}
           <div>
             <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
-              <li className="cursor-pointer hover:text-blue-500">Home</li>
-              <li className="cursor-pointer hover:text-blue-500">About</li>
-              <li className="cursor-pointer hover:text-blue-500">Contact</li>
+              {links}
             </ul>
           </div>
 
