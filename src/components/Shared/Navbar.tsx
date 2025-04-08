@@ -7,7 +7,6 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   FaBars,
-  FaRegUser,
   FaBalanceScale,
   FaRegHeart,
   FaShoppingBag,
@@ -15,8 +14,7 @@ import {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const user = useSelector((state: RootState) => state.user.user);
-  console.log(user.photo);
+  const user = useSelector((state: RootState) => state.user.user)
   const dispatch = useDispatch();
   const handleOpen = () => {
     setIsOpen(!isOpen);

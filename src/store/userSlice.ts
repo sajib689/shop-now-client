@@ -4,6 +4,7 @@ interface User {
   id: string;
   name: string;
   email: string;
+  photo: string;
 }
 
 interface UserState {
@@ -12,9 +13,10 @@ interface UserState {
 }
 
 const initialState: UserState = {
-  user: JSON.parse(localStorage.getItem('user') || 'null'),
-  token: localStorage.getItem('token') || null,
+  user: typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('user') || 'null') : null,
+  token: typeof window !== 'undefined' ? localStorage.getItem('token') || null : null,
 };
+
 
 const userSlice = createSlice({
   name: 'user',
