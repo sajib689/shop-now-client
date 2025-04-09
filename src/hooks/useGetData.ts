@@ -4,16 +4,18 @@ import axios from 'axios';
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const usePostData = <T = any, R = any>() => {
+const useGetData = <T = any, R = any>() => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<R | null>(null);
 
-  const postData = async (endpoint: string, payload: T) => {
+  const getData = async (endpoint: string, params?: T) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.post<R>(`${BASE_URL}${endpoint}`, payload);
+      const response = await axios.get<R>(`${BASE_URL}${endpoint}`, {
+        params,
+      });
       setData(response.data);
       return response.data;
     } catch (err: unknown) {
@@ -22,13 +24,13 @@ const usePostData = <T = any, R = any>() => {
       } else {
         setError('Something went wrong');
       }
-      console.error("POST error:", err);
+      console.error("GET error:", err);
     } finally {
       setLoading(false);
     }
   };
 
-  return { postData, loading, error, data };
+  return { getData, loading, error, data };
 };
 
-export default usePostData;
+export default useGetData;
