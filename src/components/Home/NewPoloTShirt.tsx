@@ -1,6 +1,8 @@
 "use client";
+import useGetData from "@/hooks/useGetData";
 import Image from "next/image";
 import Link from "next/link"
+import {useEffect} from 'react'
 const products = [
   {
     id: 1,
@@ -41,6 +43,18 @@ const products = [
 ];
 
 const NewPoloTShirt = () => {
+  const { getData, loading, error, data } = useGetData()
+  
+  
+  useEffect(() => {
+    const fetchProducts = async () => {
+      await getData("/api/v1/getproducts");
+    };
+    fetchProducts();
+  },[getData])
+  const filterPoloShirts = data?.data?.filter(d => d.productCategory === "T-Shirt") || [];
+
+  console.log(filterPoloShirts)
   return (
     <section className="py-12 px-6 bg-[#F7F7F7]">
       <div className="container mx-auto">
@@ -49,7 +63,7 @@ const NewPoloTShirt = () => {
         </h2>
 
         <div className="flex gap-6 overflow-x-auto">
-          {products.map((product) => (
+          {filterPoloShirts?.map((product) => (
             <div
               key={product.id}
               className="bg-white shadow-lg rounded-lg p-4 min-w-[250px] flex flex-col justify-between"
@@ -60,39 +74,47 @@ const NewPoloTShirt = () => {
                     {product.discount}
                   </span>
                   <Image
-                    src={product.image}
-                    alt={product.title}
+                    src={product.productImage}
+                    alt={product.productName}
                     width={250}
                     height={250}
                     className="rounded-lg"
                   />
                 </div>
                 <h3 className="mt-4 text-lg font-semibold text-gray-800">
-                  {product.title}
+                  {product.productName}
                 </h3>
                 <p className="text-green-600 flex items-center gap-2">
-                  ✔ {product.stockStatus}
+                  ✔ {product.productInStock === true ? 'In Stock' : 'Not available'}
                 </p>
                 <p className="text-gray-500 line-through">{product.oldPrice}</p>
-                <p className="text-[#01204E] font-bold">{product.price}</p>
+                <p className="text-[#01204E] font-bold">{product.productPrice}</p>
               </div>
 
               <div className="mt-4 flex gap-2">
-                <Link href='' className="cursor-pointer text-center w-full bg-[#01204E] text-white px-4 py-2 rounded hover:bg-[#011c42] transition">
-                  Add to Cart
-                </Link>
-                <Link href='/order' className="cursor-pointer w-full bg-pink-600 hover:bg-pink-700 text-white py-2 rounded text-center">
-                  Buy Now
-                </Link>
-              </div>
+  <Link
+    href=""
+    className="w-full text-center px-4 py-2 font-medium text-white rounded-xl bg-gradient-to-r from-[#01204E] to-[#023067] hover:from-[#011c42] hover:to-[#01204E] shadow-md hover:shadow-lg transform hover:scale-[1.02] transition-all duration-300 ease-in-out"
+  >
+    Add to Cart
+  </Link>
+  <Link
+    href="/order"
+    className="w-full text-center px-4 py-2 font-medium text-white rounded-xl bg-gradient-to-r from-[#FF1C55] to-[#FF4E78] hover:from-[#E6003D] hover:to-[#ff2f5c] shadow-md hover:shadow-lg transform hover:scale-[1.02] transition-all duration-300 ease-in-out"
+  >
+    Buy Now
+  </Link>
+</div>
+
             </div>
           ))}
         </div>
 
         <div className="flex justify-end mt-6">
-          <button className="px-6 py-3 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 transition">
-            MORE PRODUCTS →
-          </button>
+        <button className="px-6 py-3 text-white font-semibold rounded-xl bg-gradient-to-r from-[#FF1C55] to-[#FF4E78] hover:from-[#E6003D] hover:to-[#ff2f5c] shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out">
+  MORE PRODUCTS →
+</button>
+
         </div>
       </div>
     </section>
