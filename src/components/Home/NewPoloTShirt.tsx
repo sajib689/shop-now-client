@@ -81,7 +81,7 @@ const NewPoloTShirt = () => {
                 <Link href='' className="cursor-pointer text-center w-full bg-[#01204E] text-white px-4 py-2 rounded hover:bg-[#011c42] transition">
                   Add to Cart
                 </Link>
-                <Link href='/order' className="cursor-pointer w-full bg-pink-600 hover:bg-pink-700 text-white py-2 rounded text-center">
+                <Link href='/order' className="cursor-pointer w-full bg-[#FF1C55] hover:bg-red-600 text-white py-2 rounded text-center">
                   Buy Now
                 </Link>
               </div>
@@ -90,7 +90,7 @@ const NewPoloTShirt = () => {
         </div>
 
         <div className="flex justify-end mt-6">
-          <button className="px-6 py-3 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 transition">
+          <button className="px-6 py-3 bg-[#FF1C55] text-white font-semibold rounded-lg shadow-md hover:bg-red-600 transition">
             MORE PRODUCTS →
           </button>
         </div>
