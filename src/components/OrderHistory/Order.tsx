@@ -42,9 +42,13 @@ const Order = ({ id }: OrderProps) => {
   const handleQuantityChange = (type: 'inc' | 'dec') => {
     setQuantity((prev) => Math.max(1, prev + (type === 'inc' ? 1 : -1)));
   };
+  const price = productData?.productPrice; // e.g., "1,399.00৳"
 
-  const totalPrice = quantity * productData.price;
-
+  // Remove the currency symbol and commas
+  const numericPrice = parseFloat(price?.replace(/[^\d.-]/g, '') || '0');
+  
+  // Calculate the total price
+  const totalPrice = quantity * numericPrice;
   // Handle loading, error, and no data states
   if (loading) return <p>Loader.......</p>
   if (error) return <p className="text-center text-red-500">{error}</p>;
@@ -75,6 +79,7 @@ const Order = ({ id }: OrderProps) => {
               placeholder="Enter shipping address"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
+              required
             />
           </div>
         </div>
@@ -85,12 +90,12 @@ const Order = ({ id }: OrderProps) => {
             <div className="flex items-center justify-between">
               <div>
                 <img
-                  src={productData.productImage}
-                  alt={productData.productName}
+                  src={productData?.productImage}
+                  alt={productData?.productName}
                   className="w-40 h-40 object-cover rounded-md"
                 />
-                <p className="font-medium text-gray-800 mt-4 text-lg">{productData.productName}</p>
-                <p className="text-sm text-gray-600 mt-2">{productData.productDescription}</p>
+                <p className="font-medium text-gray-800 mt-4 text-lg">{productData?.productName}</p>
+                <p className="text-sm text-gray-600 mt-2">{productData?.productDescription}</p>
 
                 <div className="flex items-center gap-4 mt-4">
                   <button
@@ -116,8 +121,8 @@ const Order = ({ id }: OrderProps) => {
                     className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg mt-2"
                   >
                     <option value="">Choose a size</option>
-                    {productData.sizes && productData.sizes.length > 0 ? (
-                      productData.sizes.map((size: string) => (
+                    {productData?.sizes && productData?.sizes?.length > 0 ? (
+                      productData?.sizes?.map((size: string) => (
                         <option key={size} value={size}>
                           {size}
                         </option>
@@ -128,8 +133,8 @@ const Order = ({ id }: OrderProps) => {
                   </select>
                 </div>
 
-                <p className="text-sm text-gray-600 mt-2">{productData.discount}</p>
-                <p className="text-sm text-gray-600 line-through">{productData.oldPrice}</p>
+                <p className="text-sm text-gray-600 mt-2">{productData?.discount}</p>
+                <p className="text-sm text-gray-600 line-through">{productData?.oldPrice}</p>
               </div>
 
               <p className="text-[#01204E] font-semibold text-2xl">
@@ -145,8 +150,8 @@ const Order = ({ id }: OrderProps) => {
         </div>
 
         <div className="mt-8 text-center">
-          <button className="bg-[#01204E] text-white py-3 px-8 rounded-full hover:bg-[#011c42] transition-all">
-            Track Order
+          <button className="cursor-pointer bg-[#01204E] text-white py-3 px-8 rounded-full hover:bg-[#011c42] transition-all">
+            Place Order
           </button>
         </div>
       </div>
