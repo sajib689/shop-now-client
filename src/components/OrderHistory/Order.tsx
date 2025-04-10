@@ -1,4 +1,5 @@
 'use client';
+
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import React, { useState, useEffect } from 'react';
@@ -47,17 +48,17 @@ const Order = ({ id }: OrderProps) => {
 
   const handlePlaceOrder = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     if (!user?.address || !user?.phone || !user?.email) {
       alert("Missing user information. Please update your profile.");
       return;
     }
-  
+
     if (!deliveryLocation) {
       alert('Please enter your delivery location.');
       return;
     }
-  
+
     const orderData = {
       id,
       email: user.email,
@@ -72,7 +73,7 @@ const Order = ({ id }: OrderProps) => {
       status: false,
       createAt: new Date(),
     };
-  
+
     try {
       setLoading(true);
       const response = await axios.post('http://localhost:5000/api/v1/order', orderData);
@@ -88,37 +89,40 @@ const Order = ({ id }: OrderProps) => {
       setLoading(false);
     }
   };
-  
 
-  if (loading) return <p>Loader.......</p>;
+  if (loading) return <p>Loading...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
   if (!productData) return <p className="text-center text-gray-500">No product found or data is unavailable.</p>;
 
   return (
-    <section className="min-h-screen bg-gray-50 py-16 px-6">
-      <div className="max-w-4xl mx-auto bg-white p-10 rounded-xl shadow-xl">
-        <h1 className="text-4xl font-extrabold text-[#01204E] mb-8 text-center">Order Summary</h1>
+    <section className="min-h-screen bg-gray-100 py-12 px-4 md:px-8">
+      <div className="max-w-5xl mx-auto bg-white p-6 sm:p-10 rounded-xl shadow-lg">
+        <h1 className="text-3xl sm:text-4xl font-bold text-center text-[#01204E] mb-10">
+          Order Summary
+        </h1>
 
-        <div className="mb-8 border-b pb-6">
-          <p className="text-lg font-medium text-gray-700">Order ID:</p>
-          <p className="text-2xl font-semibold text-[#FF1C55]">{id}</p>
+        <div className="mb-8 border-b pb-4">
+          <p className="text-md font-medium text-gray-700">Order ID:</p>
+          <p className="text-xl font-semibold text-[#FF1C55] break-words">{id}</p>
         </div>
 
         <form onSubmit={handlePlaceOrder}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+          <div className="grid md:grid-cols-2 gap-6 mb-10">
             <div>
-              <h2 className="text-xl font-semibold text-[#01204E] mb-4">Customer Info</h2>
-              <p className="text-gray-700"><span className="font-semibold">Name:</span> {user?.name || 'N/A'}</p>
-              <p className="text-gray-700"><span className="font-semibold">Email:</span> {user?.email || 'N/A'}</p>
-              <p className="text-gray-700"><span className="font-semibold">Phone:</span> {user?.phone || 'N/A'}</p>
-              <p className="text-gray-700"><span className="font-semibold">Address:</span> {user?.address || 'N/A'}</p>
+              <h2 className="text-lg font-semibold text-[#01204E] mb-2">Customer Info</h2>
+              <ul className="space-y-2 text-sm text-gray-700">
+                <li><strong>Name:</strong> {user?.name || 'N/A'}</li>
+                <li><strong>Email:</strong> {user?.email || 'N/A'}</li>
+                <li><strong>Phone:</strong> {user?.phone || 'N/A'}</li>
+                <li><strong>Address:</strong> {user?.address || 'N/A'}</li>
+              </ul>
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold text-[#01204E] mb-4">Delivery Location</h2>
+              <h2 className="text-lg font-semibold text-[#01204E] mb-2">Delivery Location</h2>
               <input
                 type="text"
-                className="w-full px-5 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#01204E] text-gray-800"
+                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#01204E]"
                 placeholder="Enter delivery location"
                 value={deliveryLocation}
                 onChange={(e) => setDeliveryLocation(e.target.value)}
@@ -127,60 +131,57 @@ const Order = ({ id }: OrderProps) => {
             </div>
           </div>
 
-          <div className="mb-8">
-            <h2 className="text-xl font-semibold text-[#01204E] mb-4">Product Ordered</h2>
-            <div className="border rounded-xl p-6 bg-gray-50 shadow-md">
-              <div className="flex items-center justify-between">
-                <div>
-                  <img
-                    src={productData?.productImage}
-                    alt={productData?.productName}
-                    className="w-40 h-40 object-cover rounded-md"
-                  />
-                  <p className="font-medium text-gray-800 mt-4 text-lg">{productData?.productName}</p>
-                  <p className="text-sm text-gray-600 mt-2">{productData?.productDescription}</p>
+          <div className="mb-10">
+            <h2 className="text-lg font-semibold text-[#01204E] mb-4">Product Ordered</h2>
+            <div className="bg-gray-50 border rounded-xl p-4 sm:p-6 flex flex-col lg:flex-row items-start lg:items-center gap-6">
+              <img
+                src={productData?.productImage}
+                alt={productData?.productName}
+                className="w-full max-w-[150px] sm:max-w-[180px] h-auto object-cover rounded-lg"
+              />
 
-                  <div className="flex items-center gap-4 mt-4">
-                    <button
-                      type="button"
-                      className="px-4 py-2 bg-[#FF1C55] text-white rounded-full"
-                      onClick={() => handleQuantityChange('dec')}
-                    >
-                      −
-                    </button>
-                    <span className="text-lg font-semibold">{quantity}</span>
-                    <button
-                      type="button"
-                      className="px-4 py-2 bg-[#FF1C55] text-white rounded-full"
-                      onClick={() => handleQuantityChange('inc')}
-                    >
-                      +
-                    </button>
-                  </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-gray-800">{productData?.productName}</h3>
+                <p className="text-sm text-gray-600 mt-1">{productData?.productDescription}</p>
 
-                  <div className="mt-4">
-                    <label className="block text-sm font-medium text-gray-700">Select Size:</label>
-                    <select
-                      value={selectedSize}
-                      onChange={(e) => setSelectedSize(e.target.value)}
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg mt-2"
-                    >
-                      <option value="">Choose a size</option>
-                      {productData?.sizes?.length > 0 ? (
-                        productData?.sizes.map((size: string) => (
-                          <option key={size} value={size}>
-                            {size}
-                          </option>
-                        ))
-                      ) : (
-                        <option value="">No sizes available</option>
-                      )}
-                    </select>
-                  </div>
+                <div className="flex items-center gap-4 mt-4">
+                  <button
+                    type="button"
+                    className="px-3 py-1.5 bg-[#FF1C55] text-white rounded-full text-lg"
+                    onClick={() => handleQuantityChange('dec')}
+                  >
+                    −
+                  </button>
+                  <span className="text-lg font-semibold">{quantity}</span>
+                  <button
+                    type="button"
+                    className="px-3 py-1.5 bg-[#FF1C55] text-white rounded-full text-lg"
+                    onClick={() => handleQuantityChange('inc')}
+                  >
+                    +
+                  </button>
                 </div>
 
-                <p className="text-[#01204E] font-semibold text-2xl">৳{totalPrice}.00</p>
+                <div className="mt-4">
+                  <label className="block text-sm font-medium text-gray-700">Select Size</label>
+                  <select
+                    value={selectedSize}
+                    onChange={(e) => setSelectedSize(e.target.value)}
+                    className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md"
+                  >
+                    <option value="">Choose a size</option>
+                    {productData?.sizes?.length > 0 ? (
+                      productData.sizes.map((size: string) => (
+                        <option key={size} value={size}>{size}</option>
+                      ))
+                    ) : (
+                      <option value="">No sizes available</option>
+                    )}
+                  </select>
+                </div>
               </div>
+
+              <p className="text-xl font-bold text-[#01204E] mt-4 lg:mt-0">৳{totalPrice}.00</p>
             </div>
           </div>
 
@@ -189,10 +190,10 @@ const Order = ({ id }: OrderProps) => {
             <p className="text-3xl font-bold text-[#FF1C55]">৳{totalPrice}.00</p>
           </div>
 
-          <div className="mt-8 text-center">
+          <div className="mt-10 text-center">
             <button
               type="submit"
-              className="cursor-pointer bg-[#01204E] text-white py-3 px-8 rounded-full hover:bg-[#011c42] transition-all"
+              className="cursor-pointer bg-[#01204E] text-white py-3 px-10 rounded-full text-lg hover:bg-[#011c42] transition duration-300"
             >
               Place Order
             </button>
