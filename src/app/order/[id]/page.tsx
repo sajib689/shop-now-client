@@ -1,3 +1,4 @@
+import Order from "@/components/OrderHistory/Order";
 
 
 export default function Page({ params }: { params: { id: string } }) {
@@ -5,8 +6,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold">Order ID: {id}</h1>
-      {/* You can add order detail logic here */}
+      <Order id={id}/>
     </div>
   );
 }

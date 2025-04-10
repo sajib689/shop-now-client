@@ -1,9 +1,13 @@
 import React from 'react';
 
-const Order = () => {
+interface OrderProps {
+        id: string;
+}
+
+const Order = ({id}: OrderProps) => {
     return (
         <div>
-            
+            {id}
         </div>
     );
 };
