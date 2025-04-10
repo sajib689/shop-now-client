@@ -54,7 +54,6 @@ const NewPoloTShirt = () => {
   },[getData])
   const filterPoloShirts = data?.data?.filter(d => d.productCategory === "T-Shirt") || [];
 
-  console.log(filterPoloShirts)
   return (
     <section className="py-12 px-6 bg-[#F7F7F7]">
       <div className="container mx-auto">
@@ -93,13 +92,13 @@ const NewPoloTShirt = () => {
 
               <div className="mt-4 flex gap-2">
   <Link
-    href=""
+    href=''
     className="w-full text-center px-4 py-2 font-medium text-white rounded-xl bg-gradient-to-r from-[#01204E] to-[#023067] hover:from-[#011c42] hover:to-[#01204E] shadow-md hover:shadow-lg transform hover:scale-[1.02] transition-all duration-300 ease-in-out"
   >
     Add to Cart
   </Link>
   <Link
-    href="/order"
+    href={`/order/${product._id}`}
     className="w-full text-center px-4 py-2 font-medium text-white rounded-xl bg-gradient-to-r from-[#FF1C55] to-[#FF4E78] hover:from-[#E6003D] hover:to-[#ff2f5c] shadow-md hover:shadow-lg transform hover:scale-[1.02] transition-all duration-300 ease-in-out"
   >
     Buy Now
