@@ -1,8 +1,10 @@
 "use client";
 import useGetData from "@/hooks/useGetData";
+import { RootState } from "@/store/store";
 import Image from "next/image";
 import Link from "next/link"
 import {useEffect} from 'react'
+import { useSelector } from "react-redux";
 const products = [
   {
     id: 1,
@@ -44,7 +46,7 @@ const products = [
 
 const NewPoloTShirt = () => {
   const { getData, loading, error, data } = useGetData()
-  
+  const { user } = useSelector((state: RootState) => state.user);
   
   useEffect(() => {
     const fetchProducts = async () => {
@@ -53,7 +55,7 @@ const NewPoloTShirt = () => {
     fetchProducts();
   },[getData])
   const filterPoloShirts = data?.data?.filter(d => d.productCategory === "T-Shirt") || [];
-
+  if(loading) return <p>Loader......</p>
   return (
     <section className="py-12 px-6 bg-[#F7F7F7]">
       <div className="container mx-auto">
@@ -99,7 +101,7 @@ const NewPoloTShirt = () => {
   </Link>
   <Link
     href={`/order/${product._id}`}
-    className="w-full text-center px-4 py-2 font-medium text-white rounded-xl bg-gradient-to-r from-[#FF1C55] to-[#FF4E78] hover:from-[#E6003D] hover:to-[#ff2f5c] shadow-md hover:shadow-lg transform hover:scale-[1.02] transition-all duration-300 ease-in-out"
+    className={`${user?.email ? 'w-full text-center px-4 py-2 font-medium text-white rounded-xl bg-gradient-to-r from-[#FF1C55] to-[#FF4E78] hover:from-[#E6003D] hover:to-[#ff2f5c] shadow-md hover:shadow-lg transform hover:scale-[1.02] transition-all duration-300 ease-in-out' : 'disabled'}`}
   >
     Buy Now
   </Link>

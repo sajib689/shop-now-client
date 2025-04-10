@@ -3,7 +3,8 @@
 const Loader = () => {
     return (
         <div>
-            Loading........
+            {/* <FadeLoader /> */}
+            Loader.......
         </div>
     );
 };
