@@ -6,6 +6,7 @@ import { RootState } from '@/store/store';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Loader from '@/lib/Loader';
+import { useRouter } from 'next/navigation'
 
 interface OrderProps {
   id: string;
@@ -19,6 +20,7 @@ const Order = ({ id }: OrderProps) => {
   const [deliveryLocation, setDeliveryLocation] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState<string>('');
+  const router = useRouter()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -81,6 +83,7 @@ const Order = ({ id }: OrderProps) => {
       const response = await axios.post('http://localhost:5000/api/v1/order', orderData);
       if (response.status === 200 || response.status === 201) {
         toast.success('Order placed successfully with Cash on Delivery!');
+        router.push('/history')
       } else {
         setError('Failed to place order. Please try again.');
       }
@@ -92,7 +95,7 @@ const Order = ({ id }: OrderProps) => {
     }
   };
 
-  // if (loading) return <Loader/>;
+
   if (error) return <p className="text-center text-red-500">{error}</p>;
   // if (!productData) return <p className="text-center text-gray-500">No product found or data is unavailable.</p>;
 
