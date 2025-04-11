@@ -1,10 +1,25 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import IOrder from '@/types/IOrder';
+
 import Loader from '@/lib/Loader';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
+
+interface IOrder {
+  _id: string;
+  email: string;
+  address: string;
+  phone: string;
+  deliveryLocation: string;
+  paymentType: boolean;
+  productName: string;
+  price: string;
+  quantity: string;
+  trxId: string;
+  status: string;
+  createAt: Date;
+}
 
 const OrderHistory = () => {
   
@@ -12,12 +27,12 @@ const OrderHistory = () => {
   const [orders, setOrders] = useState<IOrder[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
   const fetchOrderHistory = async () => {
     try {
       setLoading(true);
       const response = await axios.get(`http://localhost:5000/api/v1/orderhistory/${user?.email}`);
       setOrders(response.data.data);
-    
     } catch (err) {
       console.error(err);
       setError('Failed to fetch order history.');
@@ -30,12 +45,13 @@ const OrderHistory = () => {
     fetchOrderHistory();
   }, []);
 
-  const handleCancelOrder = async (id: string) => {
+  const handleCancelOrder = async (_id: string) => {
     try {
-      await axios.patch(`http://localhost:5000/api/v1/orderupdate/${id}`, {
-        status: 'canclled',
+      // Correct the status to 'cancelled'
+      await axios.patch(`http://localhost:5000/api/v1/orderupdate/${_id}`, {
+        status: 'cancelled',
       });
-      fetchOrderHistory(); // Refresh data
+      fetchOrderHistory(); // Refresh data after cancellation
     } catch (err) {
       console.error('Cancel failed:', err);
       alert('Failed to cancel the order.');
@@ -69,13 +85,9 @@ const OrderHistory = () => {
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {Array.isArray(orders) && orders?.map((order) => {
-                  const isCancelled = (order as any)?.cancelled; // optional backend field
                   return (
-                    <tr
-                      key={order.id}
-                      className="hover:bg-gray-100 transition-all duration-150"
-                    >
-                      <td className="px-6 py-4 font-medium text-gray-900">{order.id}</td>
+                    <tr key={order._id} className="hover:bg-gray-100 transition-all duration-150">
+                      <td className="px-6 py-4 font-medium text-gray-900">{order._id}</td>
                       <td className="px-6 py-4">{order.productName}</td>
                       <td className="px-6 py-4">{order.quantity}</td>
                       <td className="px-6 py-4">৳{order.price}</td>
@@ -83,16 +95,16 @@ const OrderHistory = () => {
                       <td className="px-6 py-4">
                         <span
                           className={`inline-block rounded-full px-3 py-1 text-xs font-semibold ${
-                            isCancelled
+                            order.status === 'cancelled'
                               ? 'bg-red-100 text-red-800'
-                              : order.status
+                              : order.status === 'completed'
                               ? 'bg-green-100 text-green-800'
                               : 'bg-yellow-100 text-yellow-800'
                           }`}
                         >
-                          {isCancelled
+                          {order.status === 'cancelled'
                             ? 'Cancelled'
-                            : order.status
+                            : order.status === 'completed'
                             ? 'Completed'
                             : 'Pending'}
                         </span>
@@ -101,14 +113,15 @@ const OrderHistory = () => {
                         {new Date(order.createAt).toLocaleString()}
                       </td>
                       <td className="px-6 py-4 text-center">
-                        {!order.status && !isCancelled && (
+                        {/* Only show the cancel button for orders that are not cancelled or completed */}
+                        {!order.status || order.status === 'pending' ? (
                           <button
-                            onClick={() => handleCancelOrder(order.id)}
+                            onClick={() => handleCancelOrder(order._id)}
                             className="bg-red-500 hover:bg-red-600 text-white text-xs px-4 py-2 rounded-full transition-all"
                           >
                             Cancel
                           </button>
-                        )}
+                        ) : null}
                       </td>
                     </tr>
                   );

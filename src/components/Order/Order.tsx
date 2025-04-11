@@ -74,7 +74,7 @@ const Order = ({ id }: OrderProps) => {
       price: totalPrice.toString(),
       quantity: quantity.toString(),
       trxId: 'cash on delivery',
-      status: false,
+      status: 'pending',
       createAt: new Date(),
     };
 
