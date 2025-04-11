@@ -1,9 +1,11 @@
 'use client';
-
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Loader from '@/lib/Loader';
 
 interface OrderProps {
   id: string;
@@ -78,7 +80,7 @@ const Order = ({ id }: OrderProps) => {
       setLoading(true);
       const response = await axios.post('http://localhost:5000/api/v1/order', orderData);
       if (response.status === 200 || response.status === 201) {
-        alert('Order placed successfully with Cash on Delivery!');
+        toast.success('Order placed successfully with Cash on Delivery!');
       } else {
         setError('Failed to place order. Please try again.');
       }
@@ -90,12 +92,14 @@ const Order = ({ id }: OrderProps) => {
     }
   };
 
-  if (loading) return <p>Loading...</p>;
+  // if (loading) return <Loader/>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
-  if (!productData) return <p className="text-center text-gray-500">No product found or data is unavailable.</p>;
+  // if (!productData) return <p className="text-center text-gray-500">No product found or data is unavailable.</p>;
 
   return (
     <section className="min-h-screen bg-gray-100 py-12 px-4 md:px-8">
+      <ToastContainer position='top-right' />
+      {loading && <Loader />}
       <div className="max-w-5xl mx-auto bg-white p-6 sm:p-10 rounded-xl shadow-lg">
         <h1 className="text-3xl sm:text-4xl font-bold text-center text-[#01204E] mb-10">
           Order Summary
@@ -193,6 +197,7 @@ const Order = ({ id }: OrderProps) => {
           <div className="mt-10 text-center">
             <button
               type="submit"
+
               className="cursor-pointer bg-[#01204E] text-white py-3 px-10 rounded-full text-lg hover:bg-[#011c42] transition duration-300"
             >
               Place Order
