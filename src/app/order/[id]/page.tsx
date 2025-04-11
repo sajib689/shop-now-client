@@ -1,5 +1,5 @@
 // src/app/order/[id]/page.tsx
-import Order from '@/components/OrderHistory/Order';  // Adjust path as necessary
+import Order from '@/components/Order/Order';  // Adjust path as necessary
 
 export default async function Page({ params }: { params: { id: string } }) {
   // Ensure that params.id is awaited correctly
