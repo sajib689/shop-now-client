@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 import Loader from "@/lib/Loader";
 import { RootState } from "@/store/store";
+import { useRouter } from "next/navigation";
 
 const NewPoloTShirt = () => {
   const { user } = useSelector((state: RootState) => state.user);
@@ -33,7 +34,10 @@ const NewPoloTShirt = () => {
   const filterPoloShirts = products.filter(
     (d: any) => d.productCategory === "T-Shirt"
   );
-
+  const router = useRouter();
+  const handleAddToCart = async (_id: string) => {
+        console.log(handleAddToCart)
+  }
   if (loading) return <Loader />;
   if (error) return <p className="text-red-500 text-center">{error}</p>;
 
@@ -79,22 +83,29 @@ const NewPoloTShirt = () => {
               </div>
 
               <div className="mt-4 flex gap-2">
-                <Link
-                  href=""
+                <button
+                   onClick={() => handleAddToCart(product._id)}
                   className="w-full text-center px-4 py-2 font-medium text-white rounded-xl bg-gradient-to-r from-[#01204E] to-[#023067] hover:from-[#011c42] hover:to-[#01204E] shadow-md hover:shadow-lg transform hover:scale-[1.02] transition-all duration-300 ease-in-out"
                 >
                   Add to Cart
-                </Link>
-                <Link
-                  href={`/order/${product._id}`}
-                  className={`${
-                    user?.email
-                      ? "w-full text-center px-4 py-2 font-medium text-white rounded-xl bg-gradient-to-r from-[#FF1C55] to-[#FF4E78] hover:from-[#E6003D] hover:to-[#ff2f5c] shadow-md hover:shadow-lg transform hover:scale-[1.02] transition-all duration-300 ease-in-out"
-                      : "disabled"
-                  }`}
-                >
-                  Buy Now
-                </Link>
+                </button>
+                {
+                  user?.email ?
+                  <>
+                  <Link href={`/order/${product._id}`}
+      className="cursor-pointer w-full text-center px-4 py-2 font-medium text-white rounded-xl bg-gradient-to-r from-[#FF1C55] to-[#FF4E78] hover:from-[#E6003D] hover:to-[#ff2f5c] shadow-md hover:shadow-lg transform hover:scale-[1.02] transition-all duration-300 ease-in-out"
+    >
+      Buy Now
+    </Link>
+                  </>
+                  :
+                  <>
+                  {
+                    router.push("/login")
+                  }
+                  </>
+                }
+                
               </div>
             </div>
           ))}
