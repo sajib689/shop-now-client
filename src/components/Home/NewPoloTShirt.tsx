@@ -35,9 +35,26 @@ const NewPoloTShirt = () => {
     (d: any) => d.productCategory === "T-Shirt"
   );
   const router = useRouter();
-  const handleAddToCart = async (_id: string) => {
-        console.log(handleAddToCart)
-  }
+  const handleAddToCart = (_id: string) => {
+    fetch(`http://localhost:5000/api/v1/getproducts/${_id}`)
+      .then(res => res.json())
+      .then(data => {
+        const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
+  
+        const isAlreadyInCart = existingCart.some((item: any) => item._id === data.data._id);
+  
+        if (!isAlreadyInCart) {
+          const updatedCart = [...existingCart, data.data];
+          localStorage.setItem('cart', JSON.stringify(updatedCart));
+          console.log('✅ Product added to cart');
+        } else {
+          console.log('⚠️ Already in cart');
+        }
+      })
+      .catch(err => console.error('❌ Error adding to cart:', err));
+  };
+  
+  
   if (loading) return <Loader />;
   if (error) return <p className="text-red-500 text-center">{error}</p>;
 
