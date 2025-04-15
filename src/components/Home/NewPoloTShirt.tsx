@@ -35,7 +35,9 @@ const NewPoloTShirt = () => {
     (d: any) => d.productCategory === "T-Shirt"
   );
   const router = useRouter();
-
+  const handleAddToCart = async (_id: string) => {
+        console.log(handleAddToCart)
+  }
   if (loading) return <Loader />;
   if (error) return <p className="text-red-500 text-center">{error}</p>;
 
@@ -81,12 +83,12 @@ const NewPoloTShirt = () => {
               </div>
 
               <div className="mt-4 flex gap-2">
-                <Link
-                  href=""
+                <button
+                   onClick={() => handleAddToCart(product._id)}
                   className="w-full text-center px-4 py-2 font-medium text-white rounded-xl bg-gradient-to-r from-[#01204E] to-[#023067] hover:from-[#011c42] hover:to-[#01204E] shadow-md hover:shadow-lg transform hover:scale-[1.02] transition-all duration-300 ease-in-out"
                 >
                   Add to Cart
-                </Link>
+                </button>
                 {
                   user?.email ?
                   <>
